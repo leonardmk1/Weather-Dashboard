@@ -21,7 +21,17 @@ $("#searchBtn").on("click", function() {
         method: "GET"
       }).then(function(response2){
         console.log(response2.value)
-
+        const index = $("<p>").addClass("card-text current-uvi").text("UV Index: " + response2.value);
+        if(index < 2){
+            addClass("bg-success");
+        }
+        if(index < 6 || index > 3){
+            addClass("bg-warning");
+        }
+        if(index > 7){
+            addClass("bg-danger");
+        }
+        $(".card-body").append(index);
       })
     console.log(response);
     
@@ -107,8 +117,8 @@ function getCurrentForecast() {
         const card = $("<div>").addClass(
           "card col-sm-2 ml-4 bg-primary text-white"
         );
-        const cardBody = $("<div>").addClass("card-body p-1 forecastBody");
-        const cityDate = $("<h4>")
+        const cardBody = $("<div>").addClass("card-body p-2 forecastBody");
+        const cityDate = $("<h5>")
           .addClass("card-title")
           .text(date.toLocaleDateString("en-US"));
         const temperature = $("<p>")
